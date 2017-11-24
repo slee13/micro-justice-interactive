@@ -43,13 +43,13 @@ for txt, questionId in allQuestions
 						count = allAnswers["MA" + clickedLayer.questionId][clickedLayer.name].counter
 					catch
 						count = 0
-					firebaseRef.put("/MA/MA"+ clickedLayer.questionId + "/" + clickedLayer.name, 
+					firebaseRef.put("/MA/MA"+ c	lickedLayer.questionId + "/" + clickedLayer.name, 
 						{counter:count+1,
 						questionId: "MA" + clickedLayer.questionId,
 						optionId: clickedLayer.name})
 						
 					#add each individual poll to make adding a token to main data visualization easier
-					firebaseRef.post({questionId: "MA" + clickedLayer.questionId, optionId: clickedLayer.name})
+					firebaseRef.post("/answers",{questionId: "MA" + clickedLayer.questionId, optionId: clickedLayer.name})
 					clickedLayer.animate
 						scale: 1.42
 						options:

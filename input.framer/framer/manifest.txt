@@ -1,5 +1,9 @@
 app.coffee
 index.html
+images/design/3BXrNGTuisM83OSkhRaaVoI0MR1gzDIlnMoHbv5kmO4mLzfqSgfoVnv974JKYeJx1zNvhDYjxcjyEHR5TOg.png
+images/design/iFxYZNPO5vsUID9aoloElBT79BmzhTnrSvaq6n9vomhhgCnawJxcp7JkKm7ZusQ5olxF7NZxoJW5wMIuUt7A.png
+images/design/WXuHlmSSOZlL0ljoElmAbEa8JL3gPGyaZee4ZUbNo8og495c1TWnXZRQ8wCGMk3uo9RbQX1OGH3rDUShQ.png
+images/design/MKEAikzAelUatEBN0nzUiutca2mhV5l4qHsiFrmzGF4z9n99GsNDUC3AmUAQmDhZQuLjbCPJjyONbHR0re5g.png
 framer/preview.png
 framer/manifest.txt
 framer/images/cursor.png
@@ -20,6 +24,14 @@ framer/framer.generated.js
 framer/coffee-script.js
 framer/framer.init.js
 framer/framer.js
+imported/interactive_mobile_mockup@2x/layers.json.js
+imported/interactive_mobile_mockup@2x/images/Layer-hex-oundntne.png
+imported/interactive_mobile_mockup@2x/images/Layer-chev-m0e5rerg.png
+imported/interactive_mobile_mockup@2x/images/Layer-tri-mem0reqx.png
+imported/interactive_mobile_mockup@2x/layers.json
+imported/interactive_website_mockup@2x/layers.json.js
+imported/interactive_website_mockup@2x/images/Layer-Mobile-mdg2reve.png
+imported/interactive_website_mockup@2x/layers.json
 modules/myModule.coffee
 modules/firebase/firebase.coffee
 modules/firebase/module.json

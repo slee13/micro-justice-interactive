@@ -49,7 +49,11 @@ for txt, questionId in allQuestions
 						optionId: clickedLayer.name})
 						
 					#add each individual poll to make adding a token to main data visualization easier
-					firebaseRef.post({questionId: "MA" + clickedLayer.questionId, optionId: clickedLayer.name})
+					firebaseRef.push("/answers",{questionId: "MA" + clickedLayer.questionId, optionId: clickedLayer.name})
+					var newPostRef = postListRef.push();
+newPostRef.set({
+    // ...
+});
 					clickedLayer.animate
 						scale: 1.42
 						options:

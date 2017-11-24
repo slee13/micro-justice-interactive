@@ -9,13 +9,13 @@ allQuestions = ["I say something at a meeting and nobody responds. A colleague s
 
 allAnswers = {}
 
-firebaseRef.onChange "/MA", (change) -> 
-	if change.hasOwnProperty("counter")
-		if typeof allAnswers[change.questionId] == "undefined"
-			allAnswers[change.questionId] = {}
-		allAnswers[change.questionId][change.optionId] = change
-	else 
-		allAnswers = change
+# firebaseRef.onChange "/answer", (change) -> 
+# 	if change.hasOwnProperty("counter")
+# 		if typeof allAnswers[change.questionId] == "undefined"
+# 			allAnswers[change.questionId] = {}
+# 		allAnswers[change.questionId][change.optionId] = change
+# 	else 
+# 		allAnswers = change
 		
 	
 	
@@ -34,11 +34,28 @@ for txt, questionId in allQuestions
 		childLayer.questionId = questionId
 		if childLayer.name == "questionText"
 			childLayer.text = txt
-			
+		
+# 		for optionName in ["option1", "option2", "option3"]		
+# 			if childLayer.name == optionName
+# 				childLayer.onClick (event, clickedLayer) ->	
+# 					try
+# 						count = allAnswers["MA" + clickedLayer.questionId][clickedLayer.name].counter
+# 					catch
+# 						count = 0
+# 					firebaseRef.put("/MA/MA"+ clickedLayer.questionId + "/" + clickedLayer.name, 
+# 						{counter:count+1,
+# 						questionId: "MA" + clickedLayer.questionId,
+# 						optionId: clickedLayer.name})
+# 					
+# 					clickedLayer.animate
+# 						scale: 1.42
+# 						options:
+# 							time: 0.22
+# 							curve: Spring
 		for optionName in ["option1", "option2", "option3"]		
 			if childLayer.name == optionName
 				childLayer.onClick (event, clickedLayer) ->	
-					#add overall counters to individual Microaggressions for easier categorizing later
+				#add overall counters to individual Microaggressions for easier categorizing later
 					try
 						count = allAnswers["MA" + clickedLayer.questionId][clickedLayer.name].counter
 					catch
@@ -48,8 +65,8 @@ for txt, questionId in allQuestions
 						questionId: "MA" + clickedLayer.questionId,
 						optionId: clickedLayer.name})
 						
-					#add each individual poll to make adding a token to main data visualization easier
-					firebaseRef.post({questionId: "MA" + clickedLayer.questionId, optionId: clickedLayer.name})
+					#add each individual poll to m
+					firebaseRef.post("/answers",{questionId: "MA" + clickedLayer.questionId, optionId: clickedLayer.name})
 					clickedLayer.animate
 						scale: 1.42
 						options:
