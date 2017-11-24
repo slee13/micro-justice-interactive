@@ -1,0 +1,84 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6 ie-lt10 ie-lt9 ie-lt8 ie-lt7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 ie-lt10 ie-lt9 ie-lt8 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 ie-lt10 ie-lt9 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 ie-lt10 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<head>
+
+	<meta charset="utf-8">
+	<!-- Always force latest IE rendering engine (even in intranet) -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- Important stuff for SEO, don't neglect. (And don't dupicate values across your site!) -->
+	<title></title>
+	<meta name="author" content="" />
+	<meta name="description" content="" />
+
+	<!-- Don't forget to set your site up: http://google.com/webmasters -->
+	<meta name="google-site-verification" content="" />
+
+	<!-- Who owns the content of this site? -->
+	<meta name="Copyright" content="" />
+
+	<!--  Mobile Viewport
+	http://j.mp/mobileviewport & http://davidbcalhoun.com/2010/viewport-metatag
+	device-width : Occupy full width of the screen in its current orientation
+	initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
+	maximum-scale = 1.0 retains dimensions instead of zooming in if page width < device width (wrong for most sites)
+	-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Use Iconifyer to generate all the favicons and touch icons you need: http://iconifier.net -->
+	<link rel="shortcut icon" href="favicon.ico" />
+
+	<!-- concatenate and minify for production -->
+	<link rel="stylesheet" href="assets/css/reset.css" />
+	<link rel="stylesheet" href="assets/css/style.css" />
+
+	<!-- Lea Verou's prefixfree (http://leaverou.github.io/prefixfree/), lets you use un-prefixed properties in your CSS files -->
+	<script src="assets/js/libs/prefixfree.min.js"></script>
+
+	<!-- This is a minimized, base version of Modernizr. (http://modernizr.com)
+		  You will need to create new builds to get the detects you need. -->
+	<script src="assets/js/libs/modernizr-3.2.0.base.js"></script>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+	<div id="footer">
+		<div id="addVote">
+			<p>Add a vote:</p>
+		 	<button id="hexagon" onclick="hexToFirebase()">I have experienced this</button>
+			<button id="triangle" onclick="triToFirebase()">I have done this to someone</button>
+			<button id="chevron" onclick="chevToFirebase()">I don't understand why this is a problem</button>
+		 </div>
+	</div>
+</div>
+
+<!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+<!-- This is where will do all the firebase stuff -->
+<script src="assets/js/sender.js"></script>
+
+
+<script src="assets/js/functions.js"></script>
+<script>
+//Setting up an event listener to listen to specific keypress
+// document.querySelector('#commentBox').addEventListener('keypress', function (e) {
+//     var key = e.which || e.keyCode;
+//     if (key === 13) {
+//     // if key 13, enter, is pressed run this function
+//       postToFirebase();
+//     }
+// });
+</script>
+
+</body>
+</html>
