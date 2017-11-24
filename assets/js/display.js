@@ -25,7 +25,7 @@ function preload() {
 function gotData(data){
   //takes the data we got from 'value' and stores it in a var called users
   votes = data.val();
-  console.log(votes.MA0)
+  console.log(votes.MA0);
   hexCount = votes.MA0.option1.counter;
   chevCount = votes.MA0.option2.counter;
   triCount = votes.MA0.option3.counter;
@@ -34,6 +34,7 @@ function gotData(data){
   if (!shapes){
     initShapes();
   } else {
+    //how do i know which shape to add? does firebase let me know which element has updated?
     addShape();
   }
 }
@@ -48,14 +49,11 @@ function errData(err){
 var canvas;
 var shapes;
 var direction;
-// var tris;
-// var chevs;
 var MARGIN = 1;
 
+//Initializes all the shapes based on database
 function initShapes() {
   shapes = new Group();
-  // tris = new Group();
-  // chevs = new Group();
   console.log(hexCount);
   for(var i=0; i<hexCount; i++) {
     direction = random(0,180);
