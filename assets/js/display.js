@@ -9,34 +9,44 @@ var config = {
   messagingSenderId: "1031959043789"
 };
 
-var hexCount;
-var chevCount;
-var triCount;
+// Global count variables for shapes
+var hexCount = 0;
+var chevCount = 0;
+var triCount = 0;
+
+//init firebase to get all individual logged votes
 firebase.initializeApp(config);
-var getVotes = firebase.database().ref('answer/');
-//when getUserId gets a new value run gotData or errData if there's an error
+var getVotes = firebase.database().ref('answers/');
+//when getVotes gets a new value run gotData or errData if there's an error
 getVotes.on('value', gotData, errData);
 console.log("trying to get data");
 
-function preload() {
-
-}
 
 function gotData(data){
-  //takes the data we got from 'value' and stores it in a var called users
+  //takes the data we got from 'value' and stores it in a var called votes
   votes = data.val();
-  console.log(votes);
-  hexCount = votes.MA0.option1.counter;
-  chevCount = votes.MA0.option2.counter;
-  triCount = votes.MA0.option3.counter;
-  console.log(triCount);
+  //go through each vote and count through 3 categories of shapes
+  data.forEach(function(childSnapshot) {
+    var childKey = childSnapshot.key;
+    var childData = childSnapshot.val();
+    if (childData.optionId == "option1") {
+      hexCount++;
+    }
+    if (childData.optionId == "option2") {
+      chevCount++;
+    }
+    if (childData.optionId == "option3") {
+      triCount++;
+    }
+  });
+
   console.log(hexCount);
+  console.log(chevCount);
+  console.log(triCount);
+
   if (!shapes){
     initShapes();
   } else {
-    //how do i know which shape to add? does firebase let me know which element has updated?
-
-    //look up the option
     addShape();
   }
 }
@@ -63,16 +73,17 @@ function initShapes() {
     circle.addAnimation("normal", "assets/js/assets/hex1.png",  "assets/js/assets/hex2.png");
     circle.setCollider("circle", -2,2,25);
     circle.setSpeed(random(1,2), direction);
-    circle.scale = random(0.4, 0.4);
+    circle.scale = 0.4;
     circle.mass = circle.scale;
     shapes.add(circle);
   }
   for(var i=0; i<chevCount; i++) {
     var chevron = createSprite(random(0,width),random(0,height), 10, 10);
     chevron.addAnimation("normal", "assets/js/assets/chev1.png",  "assets/js/assets/chev2.png");
-    chevron.setSpeed(random(1,2), random(1, 5));
-    chevron.scale = random(0.4, 0.4);
-    chevron.mass = circle.scale;
+    chevron.setCollider("circle", -2,2,25);
+    chevron.setSpeed(random(1,2), direction);
+    chevron.scale = 0.4;
+    chevron.mass = chevron.scale;
     shapes.add(chevron);
   }
   for(var i=0; i<triCount; i++) {
@@ -80,8 +91,8 @@ function initShapes() {
     triangle.addAnimation("normal", "assets/js/assets/tri1.png",  "assets/js/assets/tri2.png");
     triangle.setCollider("circle", -2,2,25);
     triangle.setSpeed(random(1,2), random(1, 5));
-    triangle.scale = random(0.4, 0.4);
-    triangle.mass = circle.scale;
+    triangle.scale = 0.4;
+    triangle.mass = chevron.scale;
     shapes.add(triangle);
   }
 }
@@ -109,7 +120,7 @@ function draw() {
   background('#EEB9B5');
   textFont("Space Mono");
   textSize(20);
-  text("Microaggression", 10, 30);
+  text("PENTA", 10, 30);
   fill(0, 102, 153);
   if (!shapes){
     return;
@@ -121,6 +132,9 @@ function draw() {
 
   for(var i=0; i<allSprites.length; i++) {
   var s = allSprites[i];
+  // s.limitSpeed(2);
+  // s.attractionPoint(.2,width/2,height/2);
+  //s.friction = 0.95;
   if(s.position.x<0) {
     s.position.x = 1;
     s.velocity.x = abs(s.velocity.x);
