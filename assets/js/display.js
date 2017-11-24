@@ -25,7 +25,7 @@ function preload() {
 function gotData(data){
   //takes the data we got from 'value' and stores it in a var called users
   votes = data.val();
-  console.log(votes.MA0);
+  console.log(votes);
   hexCount = votes.MA0.option1.counter;
   chevCount = votes.MA0.option2.counter;
   triCount = votes.MA0.option3.counter;
@@ -35,6 +35,8 @@ function gotData(data){
     initShapes();
   } else {
     //how do i know which shape to add? does firebase let me know which element has updated?
+
+    //look up the option
     addShape();
   }
 }

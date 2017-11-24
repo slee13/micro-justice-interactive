@@ -3,7 +3,7 @@
 ### How it works
 
 This will be displayed on desktop views
-The mobile view holds the voting interaction.  (Currently lives as a framer prototype here: https://framer.cloud/QlXwl _credit to Kelvyn for initial prototype_)
+The mobile view holds the voting interaction.  (Currently lives as a framer prototype here: https://framer.cloud/MlOjc _credit to Kelvyn for initial prototype_)
 
 The desktop view should:
 1. Display all recorded votes on all instances of microaggressions (MA) _currently shows all recorded votes on one instance of a microaggression_
