@@ -96,6 +96,7 @@ function addShape() {
 
 function setup() {
   canvas = createCanvas(windowWidth,windowHeight);
+
 }
 
 window.onresize = function() {
@@ -104,6 +105,10 @@ window.onresize = function() {
 
 function draw() {
   background('#EEB9B5');
+  textFont("Space Mono");
+  textSize(20);
+  text("Microaggression", 10, 30);
+  fill(0, 102, 153);
   if (!shapes){
     return;
   }
