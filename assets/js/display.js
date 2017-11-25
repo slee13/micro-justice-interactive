@@ -10,6 +10,13 @@ var config = {
 };
 
 // Global count variables for shapes
+
+//votes contains the arrays which hold each microaggression and their related votes
+var votes = {};
+var hexagons;
+var chevrons;
+var triangles;
+
 var hexCount = 0;
 var chevCount = 0;
 var triCount = 0;
@@ -24,31 +31,47 @@ console.log("trying to get data");
 
 function gotData(data){
   //takes the data we got from 'value' and stores it in a var called votes
-  votes = data.val();
-  //go through each vote and count through 3 categories of shapes
+  //votes = data.val();
+  //go through each vote and create shapes for the vote and categorize them into which MA
   data.forEach(function(childSnapshot) {
+
     var childKey = childSnapshot.key;
     var childData = childSnapshot.val();
+
+    var questionID = childData.questionId;
+
+    //if no array for microaggression instance exists, create one
+    if(!votes[questionID]){
+      votes[questionID] = [];
+    }
+
+    //shapeContainer holds all the votes for that individual MA
+    var shapeContainer = votes[questionID];
+
     if (childData.optionId == "option1") {
       hexCount++;
+      var hexagon = createHexagon();
+      hexagons.add(hexagon);
+      shapeContainer.push(hexagon);
+
     }
     if (childData.optionId == "option2") {
       chevCount++;
+      var chevron = createChevron();
+      chevrons.add(chevron);
+      shapeContainer.push(chevron);
     }
     if (childData.optionId == "option3") {
       triCount++;
+      var triangle = createTrianlge();
+      triangles.add(triangle);
+      shapeContainer.push(triangle);
     }
   });
 
   console.log(hexCount);
   console.log(chevCount);
   console.log(triCount);
-
-  if (!shapes){
-    initShapes();
-  } else {
-    addShape();
-  }
 }
 
 function errData(err){
@@ -59,57 +82,49 @@ function errData(err){
 
 //Drawing the shapes
 var canvas;
-var shapes;
 var direction;
 var MARGIN = 1;
 
-//Initializes all the shapes based on database
-function initShapes() {
-  shapes = new Group();
-  console.log(hexCount);
-  for(var i=0; i<hexCount; i++) {
-    direction = random(0,180);
-    var circle = createSprite(random(0,width),random(0,height),10, 10);
-    circle.addAnimation("normal", "assets/js/assets/hex1.png",  "assets/js/assets/hex2.png");
-    circle.setCollider("circle", -2,2,25);
-    circle.setSpeed(random(1,2), direction);
-    circle.scale = 0.4;
-    circle.mass = circle.scale;
-    shapes.add(circle);
-  }
-  for(var i=0; i<chevCount; i++) {
-    var chevron = createSprite(random(0,width),random(0,height), 10, 10);
-    chevron.addAnimation("normal", "assets/js/assets/chev1.png",  "assets/js/assets/chev2.png");
-    chevron.setCollider("circle", -2,2,25);
-    chevron.setSpeed(random(1,2), direction);
-    chevron.scale = 0.4;
-    chevron.mass = chevron.scale;
-    shapes.add(chevron);
-  }
-  for(var i=0; i<triCount; i++) {
-    var triangle = createSprite(random(0,width),random(0,height), 10, 10);
-    triangle.addAnimation("normal", "assets/js/assets/tri1.png",  "assets/js/assets/tri2.png");
-    triangle.setCollider("circle", -2,2,25);
-    triangle.setSpeed(random(1,2), random(1, 5));
-    triangle.scale = 0.4;
-    triangle.mass = chevron.scale;
-    shapes.add(triangle);
-  }
+
+function createHexagon(){
+  direction = random(0,180);
+  var hexagon = createSprite(random(0,width),random(0,height),10, 10);
+  hexagon.addAnimation("normal", "assets/js/assets/hex1.png",  "assets/js/assets/hex2.png");
+  hexagon.setCollider("circle", -2,2,25);
+  hexagon.setSpeed(random(1,2), direction);
+  hexagon.scale = 0.4;
+  hexagon.mass = hexagon.scale;
+  hexagon.restitution = 0.1;
+  return hexagon;
 }
 
-function addShape() {
-  var circle = createSprite(random(0,width),random(0,height),10, 10);
-  circle.addAnimation("normal", "assets/js/assets/oval1.png",  "assets/js/assets/oval2.png");
-  circle.setCollider("circle", -2,2,25);
-  circle.setSpeed(random(1,2), direction);
-  circle.scale = random(0.4, 0.4);
-  circle.mass = circle.scale;
-  shapes.add(circle);
+function createTrianlge(){
+  var triangle = createSprite(random(0,width),random(0,height), 10, 10);
+  triangle.addAnimation("normal", "assets/js/assets/tri1.png",  "assets/js/assets/tri2.png");
+  triangle.setCollider("circle", -2,2,25);
+  triangle.setSpeed(random(1,2), random(1, 5));
+  triangle.scale = 0.4;
+  triangle.mass = triangle.scale;
+  triangle.restitution = 0.1;
+  return triangle;
+}
+
+function createChevron(){
+  var chevron = createSprite(random(0,width),random(0,height), 10, 10);
+  chevron.addAnimation("normal", "assets/js/assets/chev1.png",  "assets/js/assets/chev2.png");
+  chevron.setCollider("circle", -2,2,25);
+  chevron.setSpeed(random(1,2), direction);
+  chevron.scale = 0.4;
+  chevron.mass = chevron.scale;
+  chevron.restitution = 0.1;
+  return chevron;
 }
 
 function setup() {
   canvas = createCanvas(windowWidth,windowHeight);
-
+  hexagons = new Group();
+  chevrons = new Group();
+  triangles = new Group();
 }
 
 window.onresize = function() {
@@ -122,11 +137,13 @@ function draw() {
   textSize(20);
   text("PENTA", 10, 30);
   fill(0, 102, 153);
-  if (!shapes){
+  if (!hexagons){
     return;
   }
   //shapes bounce against each others and against boxes
-  shapes.bounce(shapes);
+  hexagons.bounce(chevrons);
+  hexagons.bounce(triangles);
+  triangles.bounce(chevrons);
 
   //all sprites bounce at the screen edges
 
@@ -158,4 +175,24 @@ function draw() {
 
   drawSprites();
 
+}
+
+//when you click on an MA link, filter shapes for the MA to cluster and disperse others
+function filterShapes(groupName){
+  for (let shapeGroupName in votes) {
+    var shapeGroup = votes[shapeGroupName];
+
+    for (var i = 0; i < shapeGroup.length; ++i) {
+      console.log(shapeGroup);
+      var shape = shapeGroup[i];
+      shape.setSpeed(1, 45);
+    }
+  }
+
+  var shapeContainer = votes[groupName];
+
+  for (var i = 0; i < shapeContainer.length; ++i) {
+    var shape = shapeContainer[i];
+    shape.setSpeed(4, 90);
+  }
 }
