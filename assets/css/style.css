@@ -11,7 +11,7 @@ ul {
 }
 #ma-container {
 	position: absolute;
-	top: 40px;
+	top: 80px;
 	left: 20px;
 	width: 20%;
 }
@@ -32,6 +32,13 @@ a:hover {
 
 a:visited {
 	color: black;
+	font-family: 'Space Mono';
+	display: block;
+}
+
+a:active {
+	color: pink;
+	border-bottom: 3px solid black;
 	font-family: 'Space Mono';
 	display: block;
 }

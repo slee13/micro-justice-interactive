@@ -41,19 +41,25 @@
 
 	<!-- Lea Verou's prefixfree (http://leaverou.github.io/prefixfree/), lets you use un-prefixed properties in your CSS files -->
 	<script src="assets/js/libs/prefixfree.min.js"></script>
-
-	<!-- This is a minimized, base version of Modernizr. (http://modernizr.com)
-		  You will need to create new builds to get the detects you need. -->
 	<script src="assets/js/libs/modernizr-3.2.0.base.js"></script>
 
 	<!-- for sketch -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
 	<script src="assets/js/libs/p5.play.js" type="text/javascript"></script>
+	<script src="assets/js/libs/TweenMax.min.js" type="text/javascript"></script>
+	<!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+	<!-- This is where will do all the firebase stuff -->
+	<script src="assets/js/display.js"></script>
+
 
 </head>
 
 <body>
 	<div id='ma-container'>
+		<a href="#" class = 'ma' onclick="filterShapes('MA0')">MA-000</a>
 		<a href="#" class = 'ma' onclick="filterShapes('MA1')">MA-001</a>
 		<a href="#" class = 'ma' onclick="filterShapes('MA2')">MA-002</a>
 		<a href="#" class = 'ma' onclick="filterShapes('MA3')">MA-003</a>
@@ -66,29 +72,6 @@
 		<a href="#" class = 'ma' onclick="filterShapes('MA10')">MA-010</a>
 		<a href="#" class = 'ma' onclick="filterShapes('MA11')">MA-011</a>
 	</div>
-
-
-<!-- <div class="wrapper">
-	<div id="comments">
-		<p>Comments</p>
-		<div id="firebaseComments">
-
-		</div>
-	</div>
-</div> -->
-
-<!-- Grab Google CDN's jQuery. fall back to local if necessary -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-
-<!-- This is where will do all the firebase stuff -->
-<script src="assets/js/display.js"></script>
-
-
-<!-- this is where we put our custom functions
-<script src="assets/js/functions.js"></script>
-<script>$(document).ready(getUserInfo);</script>
--->
 
 </body>
 </html>
